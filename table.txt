@@ -1,0 +1,53 @@
+
+tbl_user{
+    id(pk)    : int
+    username  : varchar(100)
+    email     : varchar(150)
+    password  : varchar(255)
+    thumbnail : varchar(255)
+}
+
+tbl_news{
+    id(pk)                                : int
+    news_type(sport,social,entertainment) : char(15)
+    category(national,international)      : char(15)
+    banner                                : varchar(255)
+    thumbnail                             : varchar(255)
+    description                           : text
+    viewer                                : int
+    title                                 : varchar(255)
+    user_id(FK)                           : int
+    created_at                            : date
+}
+
+tbl_logo{
+    id(pk)                : int
+    thumbnail             : varchar(255)
+    status(header,footer) : char(7)
+    created_at            : date
+}
+
+tbl_about_us{
+    id(pk)      : int
+    description : text
+    created_at  : date
+}
+
+tbl_follow{
+    id(pk)                  : int
+    thumbnail               : varchar(255)
+    label                   : varchar(100)
+    url                     : varchar(255)
+    status(follow,footer)   : char(7)
+    created_at              : date
+}
+
+tbl_feedback{
+    id(pk)     : int
+    username   : varchar(100)
+    email      : varchar(150)
+    telephone  : char(15)
+    address    : varchar(255)
+    message    : text
+    created_at : date
+}
