@@ -63,9 +63,21 @@
                                     </ul>
                                 </li>
                                 <li class="parent">
+                                    <a class="parent" href="javascript:void(0)">
+                                        <span>Logo</span>
+                                        <img src="assets/icon/arrow.png" alt="">
+                                    </a>
+                                    <ul class="child">
+                                        <li>
+                                            <a href="view-logo.php">View Logo</a>
+                                            <a href="add-logo.php">Add Logo</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
                                     <a class="parent" href="logout.php">
                                         <span>Logout</span>
-                                        <img src="assets/icon/arrow.png" alt="">
+                                        <!-- <img src="assets/icon/arrow.png" alt=""> -->
                                     </a>
                                 </li>
                             </ul>

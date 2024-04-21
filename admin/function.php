@@ -110,3 +110,73 @@
         }
     }
     logout();
+
+    function addLogo(){
+        if(isset($_POST['btn-add-logo'])){
+            $status = $_POST['status'];
+            $thumbnail = $_FILES['thumbnail']['name'];
+
+            if(!empty($status) && !empty($thumbnail)){
+                $thumbnail = rand(1,99999).'_'.$thumbnail;
+                $path  = 'assets/image/'.$thumbnail;
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'],$path);
+
+                $sql = "INSERT INTO `tbl_logo`(`thumbnail`, `status`) VALUES ('$thumbnail','$status')";
+                $rs  = connection()->query($sql);
+                if($rs){
+                    echo '
+                    <script>
+                        $(document).ready(function(){
+                            swal({
+                                title: "Done",
+                                text: "logo add successfully",
+                                icon: "success",
+                                button: "Done",
+                            });
+                        })
+                    </script>
+                    ';
+                }
+            }
+            else{
+                echo '
+                    <script>
+                        $(document).ready(function(){
+                            swal({
+                                title: "Error",
+                                text: "Something fill status and thumbnail",
+                                icon: "error",
+                                button: "Done",
+                            });
+                        })
+                    </script>
+                    ';
+            }
+
+        }
+    }
+    addLogo();  
+
+    function getLogo(){
+        $sql = "SELECT * FROM `tbl_logo` ORDER BY `id` DESC";
+
+        $rs  = connection()->query($sql);
+
+        while($row = mysqli_fetch_assoc($rs)){
+            echo '
+            <tr>
+                <td>'.$row['status'].'</td>
+                <td><img src="assets/image/'.$row['thumbnail'].'" width="100"></td>
+                <td>'.$row['created_at'].'</td>
+                <td width="150px">
+                    <a href=""class="btn btn-primary">Update</a>
+                    <button type="button" remove-id="3" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+            ';
+        }
+
+    }
+    
