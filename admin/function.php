@@ -169,7 +169,7 @@
                 <td><img src="assets/image/'.$row['thumbnail'].'" width="100"></td>
                 <td>'.$row['created_at'].'</td>
                 <td width="150px">
-                    <a href=""class="btn btn-primary">Update</a>
+                    <a href="update-logo.php?id='.$row['id'].'" class="btn btn-primary">Update</a>
                     <button type="button" remove-id="3" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Remove
                     </button>
@@ -180,3 +180,9 @@
 
     }
     
+    function updateLogo(){
+        if(isset($_POST['btn-update-logo'])){
+            $param_id = $_GET['id'];
+        }
+    }
+    updateLogo();
