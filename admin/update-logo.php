@@ -24,11 +24,12 @@
                                     <div class="form-group">
                                         <label>Thumbnail <span class="text-danger">Recommend size(216px X 50)</span></label>
                                         <input type="file" name="thumbnail" class="form-control">
+                                        <input type="hidden" name="old_thumbnail" value="<?php echo $row['thumbnail'] ?>" id="">
                                         <img class="mt-3" src="assets/image/<?php echo $row['thumbnail'] ?>" alt="" width="150px">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="btn-update-logo" class="btn btn-primary">Update</button>
-                                    </div>a
+                                    </div>
                                 </form>
                             </figure>
                         </div>

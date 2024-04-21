@@ -170,7 +170,7 @@
                 <td>'.$row['created_at'].'</td>
                 <td width="150px">
                     <a href="update-logo.php?id='.$row['id'].'" class="btn btn-primary">Update</a>
-                    <button type="button" remove-id="3" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" remove-id="'.$row['id'].'" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Remove
                     </button>
                 </td>
@@ -183,6 +183,77 @@
     function updateLogo(){
         if(isset($_POST['btn-update-logo'])){
             $param_id = $_GET['id'];
+            $status = $_POST['status'];
+            $thumbnail = $_FILES['thumbnail']['name'];
+            if(empty($thumbnail)){
+                $thumbnail = $_POST['old_thumbnail'];
+            }else{
+                $thumbnail = rand(1,99999).'_'.$thumbnail;
+                $path  = 'assets/image/'.$thumbnail;
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'],$path);
+            }
+
+            if(!empty($status) && !empty($thumbnail)){
+                $sql = "UPDATE `tbl_logo` SET `thumbnail` = '$thumbnail',`status`='$status' WHERE `id` = '$param_id'";
+                $rs  = connection()->query($sql);
+                if($rs){
+                    echo '
+                    <script>
+                        $(document).ready(function(){
+                            swal({
+                                title: "Done",
+                                text: "logo Update successfully",
+                                icon: "success",
+                                button: "Done",
+                            });
+                        })
+                    </script>
+                    ';
+                }
+            }
+            else{
+                echo '
+                <script>
+                    $(document).ready(function(){
+                        swal({
+                            title: "Error",
+                            text: "logo update not successfully",
+                            icon: "error",
+                            button: "Done",
+                        });
+                    })
+                </script>
+                ';
+            }
+
+
+         
         }
     }
     updateLogo();
+
+    function deleteLogo(){
+        if(isset($_POST['btn-delete-logo'])){
+            $remove_id = $_POST['remove_id'];
+
+            $sql = "DELETE FROM `tbl_logo` WHERE `id` = '$remove_id'";
+
+            $rs  = connection()->query($sql);
+            if($rs){
+                echo '
+                    <script>
+                        $(document).ready(function(){
+                            swal({
+                                title: "Done",
+                                text: "logo Delete successfully",
+                                icon: "success",
+                                button: "Done",
+                            });
+                        })
+                    </script>
+                    ';
+            }
+
+        }
+    }
+    deleteLogo();

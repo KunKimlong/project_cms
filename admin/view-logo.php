@@ -26,15 +26,6 @@
                                        
                                         <?php getLogo() ?>
                                     </table>
-                                    <ul class="pagination">
-                                        <li>
-                                            <a href="">1</a>
-                                            <a href="">2</a>
-                                            <a href="">3</a>
-                                            <a href="">4</a>
-                                        </li>
-                                    </ul>
-
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -45,7 +36,7 @@
                                                 <div class="modal-footer">
                                                     <form action="" method="post">
                                                         <input type="hidden" class="value_remove" name="remove_id">
-                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                        <button type="submit" name="btn-delete-logo" class="btn btn-danger">Yes</button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>  
                                                     </form>
                                                 </div>
