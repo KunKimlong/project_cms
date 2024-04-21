@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="btn-update-logo" class="btn btn-primary">Update</button>
-                                    </div>
+                                    </div>a
                                 </form>
                             </figure>
                         </div>
