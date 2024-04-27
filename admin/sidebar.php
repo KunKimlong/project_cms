@@ -75,6 +75,18 @@
                                     </ul>
                                 </li>
                                 <li class="parent">
+                                    <a class="parent" href="javascript:void(0)">
+                                        <span>News</span>
+                                        <img src="assets/icon/arrow.png" alt="">
+                                    </a>
+                                    <ul class="child">
+                                        <li>
+                                            <a href="view-news.php">View News</a>
+                                            <a href="add-news.php">Add News</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
                                     <a class="parent" href="logout.php">
                                         <span>Logout</span>
                                         <!-- <img src="assets/icon/arrow.png" alt=""> -->

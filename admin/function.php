@@ -257,3 +257,102 @@
         }
     }
     deleteLogo();
+
+    function addNews(){
+        if(isset($_POST['btn-add-news'])){
+            $title = $_POST['title'];
+            $newsType = $_POST['newsType'];
+            $category = $_POST['category'];
+            $thumbnail = $_FILES['thumbnail']['name'];
+            $banner = $_FILES['banner']['name'];
+            $description = $_POST['description'];
+
+            if(!empty($thumbnail) && !empty($title) && !empty($newsType) 
+                && !empty($category) && !empty($banner) && !empty($description)){
+
+                    $thumbnail = rand(1,99999).'-'.$thumbnail;
+                    $path      = 'assets/image/'.$thumbnail;
+                    move_uploaded_file($_FILES['thumbnail']['tmp_name'],$path);
+
+                    $banner = rand(1,99999).'-'.$banner;
+                    $path      = 'assets/image/'.$banner;
+                    move_uploaded_file($_FILES['banner']['tmp_name'],$path);
+
+                    $userID = $_SESSION['user'];
+
+                    $sql = "INSERT INTO `tbl_news`(`title`, `description`,`banner`, `thumbnail`, `news_type`, `category`, `viewer`, `user_id`) 
+                            VALUES ('$title','$description','$banner','$thumbnail','$newsType','$category','0','$userID')";
+
+                    $rs  = connection()->query($sql);
+                    if($rs){
+                        echo '
+                        <script>
+                            $(document).ready(function(){
+                                swal({
+                                    title: "Done",
+                                    text: "News Insert successfully",
+                                    icon: "success",
+                                    button: "Done",
+                                });
+                            })
+                        </script>
+                        ';
+                    }
+
+            }
+            else{
+                echo '
+                    <script>
+                        $(document).ready(function(){
+                            swal({
+                                title: "Error",
+                                text: "Please input all fill",
+                                icon: "error",
+                                button: "Done",
+                            });
+                        })
+                    </script>
+                    ';
+            }
+
+        }
+    }
+    addNews();
+
+    function ViewNews(){
+        $sql = "SELECT * FROM `tbl_news` ORDER BY `id` DESC";
+        $rs  = connection()->query($sql);
+        while($row = mysqli_fetch_assoc($rs)){
+            echo '
+            <tr>
+                <td>'.$row['title'].'</td>
+                <td>'.$row['news_type'].'</td>
+                <td>'.$row['category'].'</td>
+                <td><img src="assets/image/'.$row['thumbnail'].'" width="150px" height="100px"/></td>
+                <td><img src="assets/image/'.$row['banner'].'" width="150px" height="100px"/></td>
+                <td>'.$row['user_id'].'</td>
+                <td>'.$row['created_at'].'</td>
+                <td width="150px">
+                    <a href=""class="btn btn-primary">Update</a>
+                    <button type="button" remove-id="'.$row['id'].'" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+            ';   
+        }
+    }
+
+
+    function deleteNews(){
+        if(isset($_POST['btn-delete-news'])){
+            $remove_id = $_POST['remove_id'];
+
+            $sql = "DELETE FROM `tbl_news` WHERE `id` = '$remove_id'";
+            $rs  = connection()->query($sql);
+            if($rs){
+                // 
+            }
+        }
+    }
+    deleteNews();
