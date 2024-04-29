@@ -333,7 +333,7 @@
                 <td>'.$row['user_id'].'</td>
                 <td>'.$row['created_at'].'</td>
                 <td width="150px">
-                    <a href=""class="btn btn-primary">Update</a>
+                    <a href="update-news.php?id='.$row['id'].'" class="btn btn-primary">Update</a>
                     <button type="button" remove-id="'.$row['id'].'" class="btn btn-danger btn-remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Remove
                     </button>
@@ -343,6 +343,74 @@
         }
     }
 
+    function updateNews(){
+        if(isset($_POST['btn-update-news'])){
+            $id = $_GET['id'];
+            $title = $_POST['title'];
+            $newsType = $_POST['newsType'];
+            $category = $_POST['category'];
+            $thumbnail = $_FILES['thumbnail']['name'];
+            $banner = $_FILES['banner']['name'];
+            $description = $_POST['description'];
+
+            if($thumbnail){
+                $thumbnail = rand(1,99999).'-'.$thumbnail;
+                $path      = 'assets/image/'.$thumbnail;
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'],$path);
+            }
+            else{
+                $thumbnail = $_POST['old_thumbnail'];
+            }
+
+            if($banner){
+                $banner = rand(1,99999).'-'.$banner;
+                $path      = 'assets/image/'.$banner;
+                move_uploaded_file($_FILES['banner']['tmp_name'],$path);
+            }
+            else{
+                $banner = $_POST['old_banner'];
+            }
+
+            if(!empty($thumbnail) && !empty($title) && !empty($newsType) 
+                && !empty($category) && !empty($banner) && !empty($description)){
+
+                $sql = "UPDATE `tbl_news` SET `title`='$title',`description`='$description',`banner`='$banner',`thumbnail`='$thumbnail',`news_type`='$newsType',`category`='$category' WHERE `id` = '$id'";
+                $rs = connection()->query($sql);
+                if($rs){
+                    echo '
+                        <script>
+                            $(document).ready(function(){
+                                swal({
+                                    title: "Done",
+                                    text: "News Update successfully",
+                                    icon: "success",
+                                    button: "Done",
+                                });
+                            })
+                        </script>
+                    ';
+                }
+
+            }
+            else{
+                echo '
+                <script>
+                    $(document).ready(function(){
+                        swal({
+                            title: "Error",
+                            text: "Please Input all fill",
+                            icon: "error",
+                            button: "Done",
+                        });
+                    })
+                </script>
+                ';
+            }
+
+
+        }
+    }
+    updateNews();
 
     function deleteNews(){
         if(isset($_POST['btn-delete-news'])){

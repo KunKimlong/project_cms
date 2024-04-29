@@ -32,7 +32,8 @@
         <div class="container">
             <div class="logo">
                 <a href="index.php">
-                    <h3>JONGDENG NEWS</h3>
+                    <!-- <h3>JONGDENG NEWS</h3> -->
+                    <img src="../admin/assets/image/<?php getLogo('header'); ?>" width="216px" height="50px" alt="">
                 </a>
             </div>
             <ul class="menu">
