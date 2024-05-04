@@ -23,6 +23,7 @@
                                             <th>Thumbnail</th>
                                             <th>Banner</th>
                                             <th>Post By</th>
+                                            <th>Viewer</th>
                                             <th>Publish Date</th>
                                             <th>Actions</th>
                                         </tr>

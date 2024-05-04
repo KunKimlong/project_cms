@@ -320,7 +320,7 @@
     addNews();
 
     function ViewNews(){
-        $sql = "SELECT * FROM `tbl_news` ORDER BY `id` DESC";
+        $sql = "SELECT `tn`.*,`tu`.`username` FROM `tbl_news` `tn` INNER JOIN `tbl_user` `tu` ON `tn`.`user_id` = `tu`.`id` ORDER BY `id` DESC";
         $rs  = connection()->query($sql);
         while($row = mysqli_fetch_assoc($rs)){
             echo '
@@ -330,7 +330,8 @@
                 <td>'.$row['category'].'</td>
                 <td><img src="assets/image/'.$row['thumbnail'].'" width="150px" height="100px"/></td>
                 <td><img src="assets/image/'.$row['banner'].'" width="150px" height="100px"/></td>
-                <td>'.$row['user_id'].'</td>
+                <td>'.$row['username'].'</td>
+                <td>'.$row['viewer'].'</td>
                 <td>'.$row['created_at'].'</td>
                 <td width="150px">
                     <a href="update-news.php?id='.$row['id'].'" class="btn btn-primary">Update</a>
