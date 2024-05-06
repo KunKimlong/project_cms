@@ -61,7 +61,6 @@
         $rsUpdate  = connection()->query($sqlUpdate);
 
     }
-    
 
     function tredingNews(){
         $sql = "SELECT * FROM `tbl_news` ORDER BY `viewer` DESC LIMIT 1";
@@ -139,6 +138,84 @@
             echo '
                 <i class="fas fa-angle-double-right"></i>
                 <a href="news-detail.php?id='.$row['id'].'&Type='.$row['news_type'].'">'.$row['title'].'</a> &ensp;
+            ';
+        }
+    }
+
+    function getNewsByNewType($Type,$category){
+
+        if(!empty($_GET['page'])){
+            $page = $_GET['page'];
+        }
+        else{
+            $page = 1;
+        }
+        $limitnews = ($page-1)*3;
+
+
+        $sql = "SELECT * FROM `tbl_news` WHERE `news_type`='$Type' AND `category`='$category' ORDER BY `id` DESC LIMIT $limitnews,3";
+        $rs = connection()->query($sql);
+        while($row = mysqli_fetch_assoc($rs)){
+            echo '
+            <div class="col-4">
+                <figure>
+                    <a href="news-detail.php?id='.$row['id'].'&Type='.$row['news_type'].'">
+                        <div class="thumbnail">
+                        <img src="../admin/assets/image/'.$row['thumbnail'].'" width="350px" height="200" alt="">
+                        </div>
+                        <div class="detail">
+                            <h3 class="title">'.$row['title'].'</h3>
+                            <div class="date">'.$row['created_at'].'</div>
+                            <div class="description">
+                                '.$row['description'].'
+                            </div>
+                        </div>
+                    </a>
+                </figure>
+            </div>
+            ';
+        }
+    }
+
+    function pagination($Type,$category){
+        $sql = "SELECT COUNT(`id`) AS 'Total_news' FROM `tbl_news` WHERE `news_type` = '$Type' and `category`='$category'";
+        $rs  = connection()->query($sql);
+        $row = mysqli_fetch_assoc($rs);
+        $totalNews = $row['Total_news'];
+        $totalPage = ceil($totalNews/3);
+        for($i=1;$i<=$totalPage;$i++){
+            echo '
+                <li>
+                    <a href="?page='.$i.'">'.$i.'</a>
+                </li>
+            ';
+        }
+
+    }
+
+    function search(){
+        $query = $_GET['query'];
+
+        $sql = "SELECT * FROM `tbl_news` WHERE `title` LIKE '%$query%' ORDER BY `id` DESC";
+        $rs  = connection()->query($sql);
+        while($row = mysqli_fetch_assoc($rs)){
+            echo '
+                <div class="col-4">
+                    <figure>
+                        <a href="news-detail.php?id='.$row['id'].'&Type='.$row['news_type'].'">
+                            <div class="thumbnail">
+                            <img src="../admin/assets/image/'.$row['thumbnail'].'" width="350px" height="200" alt="">
+                            </div>
+                            <div class="detail">
+                                <h3 class="title">'.$row['title'].'</h3>
+                                <div class="date">'.$row['created_at'].'</div>
+                                <div class="description">
+                                    '.$row['description'].'
+                                </div>
+                            </div>
+                        </a>
+                    </figure>
+                </div>
             ';
         }
     }

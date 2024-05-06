@@ -320,7 +320,7 @@
     addNews();
 
     function ViewNews(){
-        $sql = "SELECT `tn`.*,`tu`.`username` FROM `tbl_news` `tn` INNER JOIN `tbl_user` `tu` ON `tn`.`user_id` = `tu`.`id` ORDER BY `id` DESC";
+        $sql = "SELECT `tbl_news`.*,`tbl_user`.`username` FROM `tbl_news` INNER JOIN `tbl_user` ON `tbl_news`.`user_id` =  `tbl_user`.`id` ORDER BY `id` DESC";
         $rs  = connection()->query($sql);
         while($row = mysqli_fetch_assoc($rs)){
             echo '

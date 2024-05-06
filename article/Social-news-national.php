@@ -6,7 +6,7 @@
                 <div class="col-12">
                     <div class="content-trending">
                         <div class="content-left">
-                            SPORT NEWS
+                            SOCIAL NEWS
                         </div>   
                     </div>
                 </div>
@@ -16,12 +16,21 @@
     <section class="content">
         <div class="container">
             <div class="row">
-                <?php getNewsByNewType('Sport','national') ?>
+                <?php getNewsByNewType('Social','national') ?>
             </div>
             <div class="row pagination">
                 <div class="col-12">
                     <ul>
-                        <?php pagination('Sport','national'); ?>
+                        <?php pagination('Social','national'); ?>
+                        <!-- <li>
+                            <a href="">1</a>
+                        </li>
+                        <li>
+                            <a href="">2</a>
+                        </li>
+                        <li>
+                            <a href="">3</a>
+                        </li> -->
                     </ul>   
                 </div>
             </div>

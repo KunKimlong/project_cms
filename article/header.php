@@ -44,27 +44,27 @@
                             <a href="sport-news-national.php">National</a>
                         </li>
                         <li>
-                            <a href="">International</a>
+                            <a href="Sport-news-international.php">International</a>
                         </li>
                     </ul>
                 </li>
                 <li class="menu-sport"><a href="javascript:viod(0)">SOCIAL</a>
                     <ul class="sub-menu sport">
                         <li>
-                            <a href="">National</a>
+                            <a href="Social-news-national.php">National</a>
                         </li>
                         <li>
-                            <a href="">International</a>
+                            <a href="Social-news-international.php">International</a>
                         </li>
                     </ul>
                 </li>
                 <li class="menu-sport"><a href="javascript:viod(0)">ENTERTAINMENT</a>
                     <ul class="sub-menu sport">
                         <li>
-                            <a href="">National</a>
+                            <a href="Entertainment-news-national.php">National</a>
                         </li>
                         <li>
-                            <a href="">International</a>
+                            <a href="Entertainment-news-international.php">International</a>
                         </li>
                     </ul>
                 </li>

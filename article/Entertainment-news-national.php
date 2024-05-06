@@ -6,7 +6,7 @@
                 <div class="col-12">
                     <div class="content-trending">
                         <div class="content-left">
-                            RESULT SEARCH
+                            ENTERTAINMENT NEWS
                         </div>   
                     </div>
                 </div>
@@ -16,9 +16,14 @@
     <section class="content">
         <div class="container">
             <div class="row">
-                <?php 
-                    search();
-                ?>
+                <?php getNewsByNewType('Entertainment','national') ?>
+            </div>
+            <div class="row pagination">
+                <div class="col-12">
+                    <ul>
+                    <?php pagination('Entertainment','national'); ?>
+                    </ul>   
+                </div>
             </div>
         </div>
     </section>
